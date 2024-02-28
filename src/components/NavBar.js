@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react'
+import netflixLogo from "../images/netflixLogo.png"
+import { Button } from '@mui/material'
 
 function NavBar() {
   const [movies, setMovies] = useState([])
@@ -27,7 +29,8 @@ function NavBar() {
 
   return (
     <div style={{backgroundImage:`url(https://image.tmdb.org/t/p/original${movies[4]?.poster_path})`, backgroundPosition:"center", backgroundRepeat:"no-repeat", backgroundSize:"cover", height:"400px", width:"100%"}}>
-      NavBar
+      <img style={{width:"110px", height: "90px"}} src={netflixLogo}/>
+      <Button>SignIn</Button>
       </div>
   )
 }
