@@ -1,9 +1,8 @@
-import { Box, Card, CardContent, CardMedia } from '@mui/material'
+import { Box, Card, CardContent, CardMedia, Grid } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 
 function Home () {
-
-const [movies, setMovies] = useState([])
+  const [movies, setMovies] = useState([])
 
   /**
    * The function `getMovie` makes a fetch request to retrieve a list of movies from a movie database
@@ -28,22 +27,33 @@ const [movies, setMovies] = useState([])
   console.log(movies)
 
   return (
-  <div>
-    {movies.map((movie) => {
-      return <Box>
-      <Card>
-        <CardContent>
-          <CardMedia 
-          component="img"
-          height="140"
-          image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}>
-
-          </CardMedia>
-        </CardContent>
-      </Card>
-    </Box>
-    })}
-  </div>
+    <div>
+      <Grid
+        container
+        spacing={2}
+        style={{
+          paddingTop: '20px',
+          paddingRight: '20px',
+          paddingLeft: '20px'
+        }}
+      >
+        {movies.map(movie => {
+          return (
+            <Grid item xs={3}>
+              <Box>
+                <Card>
+                  <CardMedia
+                    component='img'
+                    height='140'
+                    image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                  ></CardMedia>
+                </Card>
+              </Box>
+            </Grid>
+          )
+        })}
+      </Grid>
+    </div>
   )
 }
 
