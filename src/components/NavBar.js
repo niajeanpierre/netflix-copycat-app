@@ -45,7 +45,7 @@ function NavBar () {
           padding: '20px'
         }}
       >
-        <img style={{ width: '90px', height: '90px' }} src={netflixLogo} />
+        <img style={{ width: '200px', height: '90px' }} src={netflixLogo} />
         <Button color='error' variant='contained' sx={{ height: '40px' }}>
           Sign In
         </Button>
