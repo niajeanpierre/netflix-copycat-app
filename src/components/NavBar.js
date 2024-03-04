@@ -53,7 +53,7 @@ function NavBar () {
       <div style={{padding: "20px"}}>
         <h1 style={{color:"#F4F4F4", fontSize:"70px", fontFamily:"initial"}}>{movies[6]?.original_title}</h1>
         <h3 style={{color:"#F4F4F4", }}>
-          {movies[6].overview}
+          {movies[6]?.overview}
         </h3>
         <Button variant='contained' sx={{color:"black", bgcolor: "white", fontWeight:"bold"}}>View Trailer</Button>
       </div>
