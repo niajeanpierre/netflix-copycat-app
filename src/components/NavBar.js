@@ -1,8 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import netflixLogo from '../images/netflixLogo.png'
 import { Button } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
+import { auth } from '../firebase/setup'
+import { signOut } from 'firebase/auth'
 
 function NavBar () {
+
+const logout = async() => {
+  try {
+    await signOut(auth)
+  }catch(err){
+    console.error(err)
+  }
+ 
+}
+
+  const navigate = useNavigate()
+
   const [movies, setMovies] = useState([])
 
   /**
@@ -21,11 +36,15 @@ function NavBar () {
     }
   }
 
+  const signInClick = () => {
+    navigate('/signin')
+  }
+
   useEffect(() => {
     getMovie()
   }, [])
 
-  console.log(movies[0])
+  console.log(movies[6])
 
   return (
     <div
@@ -34,7 +53,7 @@ function NavBar () {
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
-        height: '400px',
+        height: '475px',
         width: '100%'
       }}
     >
@@ -46,18 +65,42 @@ function NavBar () {
         }}
       >
         <img style={{ width: '200px', height: '90px' }} src={netflixLogo} />
-        <Button color='error' variant='contained' sx={{ height: '40px' }}>
-          Sign In
+        <div>
+          {auth.currentUser?.emailVerified ? (
+            <Button
+            onClick={logout}
+              variant='contained'
+              color='error'
+              sx={{ height: '40px', marginLeft: '10px' }}
+            >
+              Logout
+            </Button>
+          ) : (
+            <Button
+              onClick={signInClick}
+              color='error'
+              variant='contained'
+              sx={{ height: '40px' }}
+            >
+              Sign In
+            </Button>
+          )}
+        </div>
+      </div>
+      <div style={{ padding: '20px' }}>
+        <h1
+          style={{ color: '#F4F4F4', fontSize: '70px', fontFamily: 'initial' }}
+        >
+          {movies[6]?.original_title}
+        </h1>
+        <h3 style={{ color: '#F4F4F4' }}>{movies[6]?.overview}</h3>
+        <Button
+          variant='contained'
+          sx={{ color: 'black', bgcolor: 'white', fontWeight: 'bold' }}
+        >
+          View Trailer
         </Button>
       </div>
-      <div style={{padding: "20px"}}>
-        <h1 style={{color:"#F4F4F4", fontSize:"70px", fontFamily:"initial"}}>{movies[6]?.original_title}</h1>
-        <h3 style={{color:"#F4F4F4", }}>
-          {movies[6]?.overview}
-        </h3>
-        <Button variant='contained' sx={{color:"black", bgcolor: "white", fontWeight:"bold"}}>View Trailer</Button>
-      </div>
-     
     </div>
   )
 }

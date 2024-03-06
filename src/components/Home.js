@@ -27,7 +27,7 @@ function Home () {
   console.log(movies)
 
   return (
-    <div style={{backgroundColor: "#181818"}}>
+    <div style={{ backgroundColor: '#181818' }}>
       <Grid
         container
         spacing={2}
